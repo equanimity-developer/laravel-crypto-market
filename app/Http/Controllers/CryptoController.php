@@ -21,30 +21,16 @@ class CryptoController extends Controller
     {
         try {
             $cryptos = $this->cryptoService->getMarketOverview();
-
+            
             return Inertia::render('Dashboard', [
                 'cryptos' => $cryptos,
                 'filters' => [],
-                'translations' => [
-                    'title' => __('crypto.title'),
-                    'loading' => __('crypto.loading'),
-                    'table' => [
-                        'rank' => __('crypto.table.rank'),
-                        'name' => __('crypto.table.name'),
-                        'price' => __('crypto.table.price'),
-                        'change_24h' => __('crypto.table.change_24h'),
-                        'market_cap' => __('crypto.table.market_cap'),
-                    ],
-                ],
             ]);
-
         } catch (\Exception $e) {
             return Inertia::render('Dashboard', [
                 'cryptos' => [],
-                'error' => __('crypto.error'),
-                'translations' => [
-                    'title' => __('crypto.title'),
-                ],
+                'filters' => [],
+                'error' => $e->getMessage(),
             ]);
         }
     }

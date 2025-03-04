@@ -18,6 +18,12 @@ return [
         'title' => 'Filtry',
         'apply' => 'Zastosuj Filtry',
         'reset' => 'Resetuj',
+        'search' => 'Szukaj',
+        'min_price' => 'Min. Cena ($)',
+        'max_price' => 'Maks. Cena ($)',
+        'search_placeholder' => 'Bitcoin, ETH...',
+        'min_placeholder' => '0',
+        'max_placeholder' => '1000',
     ],
     
     'logs' => [
@@ -30,5 +36,10 @@ return [
     'languages' => [
         'en' => 'Angielski',
         'pl' => 'Polski',
+    ],
+    
+    'sorting' => [
+        'asc' => 'Rosnąco',
+        'desc' => 'Malejąco',
     ],
 ]; 
