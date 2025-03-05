@@ -1,0 +1,9 @@
+@layer components {
+  .icon {
+    @apply inline-flex;
+  }
+  
+  .icon-interactive {
+    @apply cursor-pointer transition-colors duration-150 hover:text-gray-800;
+  }
+} 

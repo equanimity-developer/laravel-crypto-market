@@ -1,0 +1,25 @@
+@layer components {
+  .btn {
+    @apply inline-flex items-center px-4 py-2 text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 cursor-pointer transition-all duration-150 hover:brightness-95;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center px-4 py-2 text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 border border-transparent shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 cursor-pointer;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center px-4 py-2 text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 border border-gray-300 shadow-sm text-gray-700 bg-white hover:bg-gray-50 focus:ring-indigo-500 cursor-pointer;
+  }
+
+  .language-btn {
+    @apply px-2 py-1 text-sm rounded;
+  }
+
+  .language-btn-active {
+    @apply bg-blue-600 text-white;
+  }
+
+  .language-btn-inactive {
+    @apply bg-gray-200 hover:bg-gray-300;
+  }
+}

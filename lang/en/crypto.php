@@ -16,7 +16,7 @@ return [
 
     'filters' => [
         'title' => 'Filters',
-        'apply' => 'Apply Filters',
+        'apply' => 'Apply',
         'reset' => 'Reset',
         'search' => 'Search',
         'min_price' => 'Min Price ($)',
@@ -44,12 +44,13 @@ return [
     ],
 
     'pagination' => [
+        'previous' => 'Previous',
+        'next' => 'Next',
         'showing' => 'Showing',
         'to' => 'to',
         'of' => 'of',
         'results' => 'results',
-        'previous' => 'Previous',
-        'next' => 'Next',
+        'per_page' => 'Items per page:',
     ],
 
     'messages' => [

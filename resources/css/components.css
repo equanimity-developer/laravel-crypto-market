@@ -1,6 +1,18 @@
 @layer components {
+  .crypto-table {
+    @apply min-w-full divide-y divide-gray-200;
+  }
+
   .table-header {
-    @apply px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider;
+    @apply px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 transition-colors duration-150;
+  }
+
+  .table-header-content {
+    @apply flex items-center;
+  }
+
+  .table-row {
+    @apply hover:bg-gray-50;
   }
 
   .table-cell {
@@ -10,16 +22,120 @@
   .table-cell-with-name {
     @apply px-6 py-4 whitespace-nowrap;
   }
-  
+
   .table-price-cell {
-    @apply px-6 py-4 whitespace-nowrap;
+    @apply px-6 py-4 whitespace-nowrap text-sm text-gray-900;
   }
-  
+
   .text-name {
     @apply text-sm font-medium text-gray-900;
   }
-  
+
   .text-symbol {
     @apply text-sm text-gray-500;
   }
-} 
+
+  .price-positive {
+    @apply text-green-600;
+  }
+
+  .price-negative {
+    @apply text-red-600;
+  }
+
+  .price-neutral {
+    @apply text-gray-600;
+  }
+
+  .filter-container {
+    @apply bg-white p-4 rounded-lg shadow-sm mb-6 border border-gray-200;
+  }
+
+  .filter-title {
+    @apply text-lg font-medium text-gray-700 mb-4;
+  }
+
+  .filter-grid {
+    @apply grid grid-cols-1 md:grid-cols-3 gap-4;
+  }
+
+  .filter-label {
+    @apply block text-sm font-medium text-gray-700 mb-1;
+  }
+
+  .filter-input {
+    @apply w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm;
+  }
+
+  .filter-actions {
+    @apply flex justify-end mt-4 space-x-2;
+  }
+
+  .btn {
+    @apply inline-flex items-center px-4 py-2 text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 cursor-pointer transition-all duration-150 hover:brightness-95;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center px-4 py-2 text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 border border-transparent shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 cursor-pointer;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center px-4 py-2 text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 border border-gray-300 shadow-sm text-gray-700 bg-white hover:bg-gray-50 focus:ring-indigo-500 cursor-pointer;
+  }
+
+  .language-btn {
+    @apply px-2 py-1 text-sm rounded;
+  }
+
+  .language-btn-active {
+    @apply bg-blue-600 text-white;
+  }
+
+  .language-btn-inactive {
+    @apply bg-gray-200 hover:bg-gray-300;
+  }
+
+  .pagination-container {
+    @apply flex items-center justify-between border-t border-gray-200 px-4 py-3 sm:px-6 mt-4;
+  }
+
+  .pagination-mobile {
+    @apply flex flex-1 justify-between sm:hidden;
+  }
+
+  .pagination-desktop {
+    @apply hidden sm:flex sm:flex-1 sm:items-center sm:justify-between;
+  }
+
+  .pagination-info {
+    @apply text-sm text-gray-700;
+  }
+
+  .pagination-info-highlight {
+    @apply font-medium;
+  }
+
+  .pagination-nav {
+    @apply isolate inline-flex -space-x-px rounded-md shadow-sm;
+  }
+
+  .pagination-btn {
+    @apply relative inline-flex items-center px-4 py-2 text-sm font-semibold ring-1 ring-inset ring-gray-300 cursor-pointer;
+  }
+
+  .pagination-btn-active {
+    @apply relative z-10 inline-flex items-center bg-indigo-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 cursor-default;
+  }
+
+  .pagination-btn-inactive {
+    @apply text-gray-900 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 cursor-pointer;
+  }
+
+  .pagination-arrow {
+    @apply relative inline-flex items-center px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 focus:z-20 focus:outline-offset-0 hover:bg-gray-50 cursor-pointer transition-colors duration-150;
+  }
+
+  .pagination-disabled {
+    @apply cursor-not-allowed opacity-50 hover:brightness-100;
+  }
+}

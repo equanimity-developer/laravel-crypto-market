@@ -1,0 +1,53 @@
+@layer components {
+  .pagination-container {
+    @apply flex items-center justify-between border-t border-gray-200 px-4 py-3 sm:px-6 mt-4;
+  }
+
+  .pagination-mobile {
+    @apply flex flex-1 justify-between sm:hidden;
+  }
+
+  .pagination-desktop {
+    @apply hidden sm:flex sm:flex-1 sm:items-center sm:justify-between;
+  }
+
+  .pagination-info {
+    @apply text-sm text-gray-700;
+  }
+
+  .pagination-info-highlight {
+    @apply font-medium;
+  }
+
+  .pagination-nav {
+    @apply isolate inline-flex -space-x-px rounded-md shadow-sm;
+  }
+
+  .pagination-btn {
+    @apply relative inline-flex items-center px-4 py-2 text-sm font-semibold ring-1 ring-inset ring-gray-300 cursor-pointer;
+  }
+
+  .pagination-btn-active {
+    @apply relative z-10 inline-flex items-center bg-indigo-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 cursor-default;
+  }
+
+  .pagination-btn-inactive {
+    @apply text-gray-900 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 cursor-pointer;
+  }
+
+  .pagination-arrow {
+    @apply relative inline-flex items-center px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 focus:z-20 focus:outline-offset-0 hover:bg-gray-50 cursor-pointer transition-colors duration-150;
+  }
+
+  .pagination-disabled {
+    @apply cursor-not-allowed opacity-50 hover:brightness-100;
+  }
+
+  .per-page-selector {
+    @apply flex items-center text-sm text-gray-700;
+  }
+
+  .per-page-select {
+    @apply rounded-md border border-gray-300 py-1.5 pl-3 pr-10 bg-white text-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 cursor-pointer shadow-sm;
+  }
+}

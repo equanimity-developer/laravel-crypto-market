@@ -1,0 +1,49 @@
+@layer components {
+  .crypto-table {
+    @apply min-w-full divide-y divide-gray-200;
+  }
+  
+  .table-header {
+    @apply px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 transition-colors duration-150;
+  }
+
+  .table-header-content {
+    @apply flex items-center;
+  }
+
+  .table-row {
+    @apply hover:bg-gray-50;
+  }
+
+  .table-cell {
+    @apply px-6 py-4 whitespace-nowrap text-sm text-gray-500;
+  }
+
+  .table-cell-with-name {
+    @apply px-6 py-4 whitespace-nowrap;
+  }
+  
+  .table-price-cell {
+    @apply px-6 py-4 whitespace-nowrap text-sm text-gray-900;
+  }
+  
+  .text-name {
+    @apply text-sm font-medium text-gray-900;
+  }
+  
+  .text-symbol {
+    @apply text-sm text-gray-500;
+  }
+
+  .price-positive {
+    @apply text-green-600;
+  }
+
+  .price-negative {
+    @apply text-red-600;
+  }
+
+  .price-neutral {
+    @apply text-gray-600;
+  }
+} 

@@ -1,81 +1,77 @@
 <template>
-  <div class="flex items-center justify-between border-t border-gray-200 px-4 py-3 sm:px-6 mt-4">
-    <div class="flex flex-1 justify-between sm:hidden">
-      <button
+  <div class="pagination-container">
+    <div class="pagination-mobile">
+      <PaginationButton
         @click="emit('page-change', currentPage - 1)"
         :disabled="currentPage <= 1"
-        :class="currentPage <= 1 ? 'cursor-not-allowed opacity-50' : 'cursor-pointer hover:bg-gray-50'"
-        class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700"
+        :base-class="'btn-secondary'"
+        :inactive-class="''"
+        :extra-classes="['mr-3']"
       >
         {{ translations?.pagination?.previous || 'Previous' }}
-      </button>
-      <button
+      </PaginationButton>
+      <PaginationButton
         @click="emit('page-change', currentPage + 1)"
         :disabled="currentPage >= totalPages"
-        :class="currentPage >= totalPages ? 'cursor-not-allowed opacity-50' : 'cursor-pointer hover:bg-gray-50'"
-        class="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700"
+        :base-class="'btn-secondary'"
+        :inactive-class="''"
       >
         {{ translations?.pagination?.next || 'Next' }}
-      </button>
+      </PaginationButton>
     </div>
-    <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
-      <div>
-        <p class="text-sm text-gray-700">
-          {{ translations?.pagination?.showing || 'Showing' }}
-          <span class="font-medium">{{ startItem }}</span>
-          {{ translations?.pagination?.to || 'to' }}
-          <span class="font-medium">{{ endItem }}</span>
-          {{ translations?.pagination?.of || 'of' }}
-          <span class="font-medium">{{ totalItems }}</span>
-          {{ translations?.pagination?.results || 'results' }}
-        </p>
+    <div class="pagination-desktop">
+      <div class="flex items-center gap-x-6">
+        <PaginationInfo
+          :start-item="startItem"
+          :end-item="endItem"
+          :total-items="totalItems"
+          :translations="translations"
+        />
+        <PerPageSelector
+          :value="itemsPerPage"
+          @update="handlePerPageChange"
+          :translations="translations"
+        />
       </div>
       <div>
-        <nav class="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
-          <button
+        <nav class="pagination-nav" aria-label="Pagination">
+          <PaginationButton
             @click="emit('page-change', currentPage - 1)"
             :disabled="currentPage <= 1"
-            :class="currentPage <= 1 ? 'cursor-not-allowed opacity-50' : 'cursor-pointer hover:bg-gray-50'"
-            class="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 focus:z-20 focus:outline-offset-0"
+            :base-class="'pagination-arrow'"
+            :inactive-class="''"
+            :extra-classes="['rounded-l-md']"
           >
             <span class="sr-only">Previous</span>
-            <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-              <path fill-rule="evenodd" d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z" clip-rule="evenodd" />
-            </svg>
-          </button>
+            <Icon name="chevron-left" />
+          </PaginationButton>
 
           <template v-for="(page, index) in paginationRange" :key="index">
-            <button
+            <PaginationButton
               v-if="page !== '...'"
               @click="emit('page-change', page)"
-              class="cursor-pointer"
-              :class="[
-                page === currentPage
-                  ? 'relative z-10 inline-flex items-center bg-indigo-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
-                  : 'relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0'
-              ]"
+              :active="page === currentPage"
             >
               {{ page }}
-            </button>
+            </PaginationButton>
             <span
               v-else
-              class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 focus:outline-offset-0"
+              class="pagination-btn"
             >
               ...
             </span>
           </template>
 
-          <button
+          <PaginationButton
             @click="emit('page-change', currentPage + 1)"
             :disabled="currentPage >= totalPages"
-            :class="currentPage >= totalPages ? 'cursor-not-allowed opacity-50' : 'cursor-pointer hover:bg-gray-50'"
-            class="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 focus:z-20 focus:outline-offset-0"
+            :base-class="'pagination-arrow'"
+            :inactive-class="''"
+            :extra-classes="['rounded-r-md']"
           >
             <span class="sr-only">Next</span>
-            <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-              <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" />
-            </svg>
-          </button>
+            <Icon name="chevron-right" />
+          </PaginationButton>
         </nav>
       </div>
     </div>
@@ -85,6 +81,10 @@
 <script setup>
 import { computed } from 'vue';
 import { usePage } from '@inertiajs/vue3';
+import PaginationButton from '@/Components/Pagination/PaginationButton.vue';
+import PaginationInfo from '@/Components/Pagination/PaginationInfo.vue';
+import PerPageSelector from '@/Components/Pagination/PerPageSelector.vue';
+import Icon from '@/Components/UI/Icon.vue';
 
 const page = usePage();
 const translations = computed(() => page.props.translations);
@@ -104,11 +104,15 @@ const props = defineProps({
   }
 });
 
-const emit = defineEmits(['page-change']);
+const emit = defineEmits(['page-change', 'per-page-change']);
 
 const totalPages = computed(() => Math.max(1, Math.ceil(props.totalItems / props.itemsPerPage)));
 const startItem = computed(() => props.totalItems === 0 ? 0 : ((props.currentPage - 1) * props.itemsPerPage) + 1);
 const endItem = computed(() => Math.min(startItem.value + props.itemsPerPage - 1, props.totalItems));
+
+function handlePerPageChange(newPerPage) {
+  emit('per-page-change', newPerPage);
+}
 
 const paginationRange = computed(() => {
   const delta = 1;
