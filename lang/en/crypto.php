@@ -42,4 +42,21 @@ return [
         'asc' => 'Ascending',
         'desc' => 'Descending',
     ],
+
+    'pagination' => [
+        'showing' => 'Showing',
+        'to' => 'to',
+        'of' => 'of',
+        'results' => 'results',
+        'previous' => 'Previous',
+        'next' => 'Next',
+    ],
+
+    'messages' => [
+        'cache_cleared' => 'Cache cleared successfully. Showing fresh market data.',
+    ],
+
+    'controls' => [
+        'refresh' => 'Refresh Data',
+    ],
 ];

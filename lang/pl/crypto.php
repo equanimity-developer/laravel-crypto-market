@@ -42,4 +42,21 @@ return [
         'asc' => 'Rosnąco',
         'desc' => 'Malejąco',
     ],
+    
+    'pagination' => [
+        'showing' => 'Wyświetlanie',
+        'to' => 'do',
+        'of' => 'z',
+        'results' => 'wyników',
+        'previous' => 'Poprzednia',
+        'next' => 'Następna',
+    ],
+    
+    'messages' => [
+        'cache_cleared' => 'Pamięć podręczna wyczyszczona. Wyświetlam najnowsze dane rynkowe.',
+    ],
+    
+    'controls' => [
+        'refresh' => 'Odśwież dane',
+    ],
 ]; 

@@ -22,86 +22,96 @@
           <div class="text-gray-500">{{ translations.loading }}</div>
         </div>
 
-        <div v-else class="overflow-x-auto">
-          <table class="min-w-full divide-y divide-gray-200">
-            <thead class="bg-gray-50">
-              <tr>
-                <th scope="col"
-                    @click="toggleSort('market_cap_rank')"
-                    class="table-header cursor-pointer">
-                  <div class="flex items-center">
-                    {{ translations.table.rank }}
-                    <SortIndicator :active="sortField === 'market_cap_rank'" :direction="sortDirection" />
-                  </div>
-                </th>
-                <th scope="col"
-                    @click="toggleSort('name')"
-                    class="table-header cursor-pointer">
-                  <div class="flex items-center">
-                    {{ translations.table.name }}
-                    <SortIndicator :active="sortField === 'name'" :direction="sortDirection" />
-                  </div>
-                </th>
-                <th scope="col"
-                    @click="toggleSort('current_price')"
-                    class="table-header cursor-pointer">
-                  <div class="flex items-center">
-                    {{ translations.table.price }}
-                    <SortIndicator :active="sortField === 'current_price'" :direction="sortDirection" />
-                  </div>
-                </th>
-                <th scope="col"
-                    @click="toggleSort('price_change_percentage_24h')"
-                    class="table-header cursor-pointer">
-                  <div class="flex items-center">
-                    {{ translations.table.change_24h }}
-                    <SortIndicator :active="sortField === 'price_change_percentage_24h'" :direction="sortDirection" />
-                  </div>
-                </th>
-                <th scope="col"
-                    @click="toggleSort('market_cap')"
-                    class="table-header cursor-pointer">
-                  <div class="flex items-center">
-                    {{ translations.table.market_cap }}
-                    <SortIndicator :active="sortField === 'market_cap'" :direction="sortDirection" />
-                  </div>
-                </th>
-              </tr>
-            </thead>
-            <tbody class="bg-white divide-y divide-gray-200">
-              <tr v-for="crypto in sortedAndFilteredCryptos" :key="crypto.id" class="hover:bg-gray-50">
-                <td class="table-cell">
-                  {{ crypto.market_cap_rank }}
-                </td>
-                <td class="table-cell-with-name">
-                  <div class="flex items-center">
-                    <div class="flex-shrink-0 h-10 w-10">
-                      <img class="h-10 w-10 rounded-full" :src="crypto.image" :alt="crypto.name">
+        <div v-else>
+          <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th scope="col"
+                      @click="toggleSort('market_cap_rank')"
+                      class="table-header cursor-pointer">
+                    <div class="flex items-center">
+                      {{ translations.table.rank }}
+                      <SortIndicator :active="sortField === 'market_cap_rank'" :direction="sortDirection" />
                     </div>
-                    <div class="ml-4">
-                      <div class="text-name">
-                        {{ crypto.name }}
+                  </th>
+                  <th scope="col"
+                      @click="toggleSort('name')"
+                      class="table-header cursor-pointer">
+                    <div class="flex items-center">
+                      {{ translations.table.name }}
+                      <SortIndicator :active="sortField === 'name'" :direction="sortDirection" />
+                    </div>
+                  </th>
+                  <th scope="col"
+                      @click="toggleSort('current_price')"
+                      class="table-header cursor-pointer">
+                    <div class="flex items-center">
+                      {{ translations.table.price }}
+                      <SortIndicator :active="sortField === 'current_price'" :direction="sortDirection" />
+                    </div>
+                  </th>
+                  <th scope="col"
+                      @click="toggleSort('price_change_percentage_24h')"
+                      class="table-header cursor-pointer">
+                    <div class="flex items-center">
+                      {{ translations.table.change_24h }}
+                      <SortIndicator :active="sortField === 'price_change_percentage_24h'" :direction="sortDirection" />
+                    </div>
+                  </th>
+                  <th scope="col"
+                      @click="toggleSort('market_cap')"
+                      class="table-header cursor-pointer">
+                    <div class="flex items-center">
+                      {{ translations.table.market_cap }}
+                      <SortIndicator :active="sortField === 'market_cap'" :direction="sortDirection" />
+                    </div>
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="bg-white divide-y divide-gray-200">
+                <tr v-for="crypto in paginatedCryptos" :key="crypto.id" class="hover:bg-gray-50">
+                  <td class="table-cell">
+                    {{ crypto.market_cap_rank }}
+                  </td>
+                  <td class="table-cell-with-name">
+                    <div class="flex items-center">
+                      <div class="flex-shrink-0 h-10 w-10">
+                        <img class="h-10 w-10 rounded-full" :src="crypto.image" :alt="crypto.name">
                       </div>
-                      <div class="text-symbol">
-                        {{ crypto.symbol.toUpperCase() }}
+                      <div class="ml-4">
+                        <div class="text-name">
+                          {{ crypto.name }}
+                        </div>
+                        <div class="text-symbol">
+                          {{ crypto.symbol.toUpperCase() }}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </td>
-                <td class="table-price-cell">
-                  <div class="text-sm text-gray-900">${{ formatPrice(crypto.current_price) }}</div>
-                </td>
-                <td class="table-cell">
-                  <span :class="getPriceChangeClass(crypto.price_change_percentage_24h)">
-                    {{ formatPercentage(crypto.price_change_percentage_24h) }}
-                  </span>
-                </td>
-                <td class="table-cell">
-                  ${{ formatMarketCap(crypto.market_cap) }}
-                </td>
-              </tr>
-            </tbody>
-          </table>
+                  </td>
+                  <td class="table-price-cell">
+                    <div class="text-sm text-gray-900">${{ formatPrice(crypto.current_price) }}</div>
+                  </td>
+                  <td class="table-cell">
+                    <span :class="getPriceChangeClass(crypto.price_change_percentage_24h)">
+                      {{ formatPercentage(crypto.price_change_percentage_24h) }}
+                    </span>
+                  </td>
+                  <td class="table-cell">
+                    ${{ formatMarketCap(crypto.market_cap) }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Pagination Component -->
+          <Pagination
+            :current-page="currentPage"
+            :items-per-page="itemsPerPage"
+            :total-items="filteredCryptos.length"
+            @page-change="handlePageChange"
+          />
         </div>
       </div>
     </div>
@@ -114,6 +124,7 @@ import { usePage } from '@inertiajs/vue3';
 import LanguageSwitcher from '@/Components/LanguageSwitcher.vue';
 import CryptoFilter from '@/Components/CryptoFilter.vue';
 import SortIndicator from '@/Components/SortIndicator.vue';
+import Pagination from '@/Components/Pagination.vue';
 
 const page = usePage();
 const translations = computed(() => page.props.translations);
@@ -124,12 +135,14 @@ const props = defineProps({
   error: String,
 });
 
+const currentPage = ref(1);
+const itemsPerPage = ref(100);
+
 const localFilters = ref({
   search: props.filters?.search || '',
   min_price: props.filters?.min_price || '',
   max_price: props.filters?.max_price || ''
 });
-
 const sortField = ref('market_cap_rank');
 const sortDirection = ref('asc');
 
@@ -159,12 +172,6 @@ const filteredCryptos = computed(() => {
     }
   }
 
-  return result;
-});
-
-const sortedAndFilteredCryptos = computed(() => {
-  const result = [...filteredCryptos.value];
-
   return result.sort((a, b) => {
     const aValue = a[sortField.value];
     const bValue = b[sortField.value];
@@ -183,6 +190,21 @@ const sortedAndFilteredCryptos = computed(() => {
   });
 });
 
+const paginatedCryptos = computed(() => {
+  const startIndex = (currentPage.value - 1) * itemsPerPage.value;
+  return filteredCryptos.value.slice(startIndex, startIndex + itemsPerPage.value);
+});
+
+function handlePageChange(newPage) {
+  currentPage.value = newPage;
+  document.querySelector('.overflow-x-auto')?.scrollIntoView({ behavior: 'smooth' });
+}
+
+function handleFilter(filters) {
+  localFilters.value = filters;
+  currentPage.value = 1;
+}
+
 function toggleSort(field) {
   if (sortField.value === field) {
     sortDirection.value = sortDirection.value === 'asc' ? 'desc' : 'asc';
@@ -190,10 +212,7 @@ function toggleSort(field) {
     sortField.value = field;
     sortDirection.value = 'asc';
   }
-}
-
-function handleFilter(filters) {
-  localFilters.value = filters;
+  currentPage.value = 1;
 }
 
 function formatPrice(price) {
@@ -220,7 +239,7 @@ function formatMarketCap(marketCap) {
 }
 
 function getPriceChangeClass(change) {
-  if (!change) return 'text-gray-500';
+  if (change === null) return 'text-gray-600';
   return change >= 0 ? 'text-green-600' : 'text-red-600';
 }
 </script>
