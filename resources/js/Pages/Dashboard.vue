@@ -3,8 +3,11 @@
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
       <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
         <div class="flex justify-between items-center mb-6">
-          <h1 class="text-2xl font-bold text-gray-800">{{ translations.title }}</h1>
-          <LanguageSwitcher />
+          <h1 class="text-2xl font-bold text-gray-800">{{ translations?.title || 'Cryptocurrency Market' }}</h1>
+          <div class="flex items-center space-x-2">
+            <ReloadButton />
+            <LanguageSwitcher />
+          </div>
         </div>
 
         <CryptoFilter
@@ -42,6 +45,7 @@
 import { ref, computed, onMounted } from 'vue';
 import { usePage } from '@inertiajs/vue3';
 import LanguageSwitcher from '@/Components/LanguageSwitcher.vue';
+import ReloadButton from '@/Components/UI/ReloadButton.vue';
 import CryptoFilter from '@/Components/CryptoFilter.vue';
 import CryptoTable from '@/Components/CryptoTable/CryptoTable.vue';
 import Pagination from '@/Components/Pagination.vue';

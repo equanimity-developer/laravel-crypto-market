@@ -6,6 +6,12 @@ return [
     'loading' => 'Loading cryptocurrency data...',
     'error' => 'Unable to fetch cryptocurrency data. Please try again later.',
 
+    'refresh' => [
+        'button' => 'Refresh Data',
+        'loading' => 'Refreshing...',
+        'success' => 'Data refreshed successfully',
+    ],
+
     'table' => [
         'rank' => 'Rank',
         'name' => 'Name',

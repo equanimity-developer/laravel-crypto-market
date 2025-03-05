@@ -6,6 +6,12 @@ return [
     'loading' => 'Ładowanie danych kryptowalut...',
     'error' => 'Nie można pobrać danych kryptowalut. Spróbuj ponownie później.',
 
+    'refresh' => [
+        'button' => 'Odśwież Dane',
+        'loading' => 'Odświeżanie...',
+        'success' => 'Dane zostały odświeżone',
+    ],
+
     'table' => [
         'rank' => 'Pozycja',
         'name' => 'Nazwa',

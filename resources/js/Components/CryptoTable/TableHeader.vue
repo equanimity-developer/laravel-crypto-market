@@ -3,31 +3,31 @@
     <tr>
       <th scope="col" @click="toggleSort('market_cap_rank')" class="table-header">
         <div class="table-header-content">
-          {{ translations.table.rank }}
+          {{ translations?.table?.rank || 'Rank' }}
           <SortIndicator :active="sortField === 'market_cap_rank'" :direction="sortDirection" />
         </div>
       </th>
       <th scope="col" @click="toggleSort('name')" class="table-header">
         <div class="table-header-content">
-          {{ translations.table.name }}
+          {{ translations?.table?.name || 'Name' }}
           <SortIndicator :active="sortField === 'name'" :direction="sortDirection" />
         </div>
       </th>
       <th scope="col" @click="toggleSort('current_price')" class="table-header">
         <div class="table-header-content">
-          {{ translations.table.price }}
+          {{ translations?.table?.price || 'Price' }}
           <SortIndicator :active="sortField === 'current_price'" :direction="sortDirection" />
         </div>
       </th>
       <th scope="col" @click="toggleSort('price_change_percentage_24h')" class="table-header">
         <div class="table-header-content">
-          {{ translations.table.change_24h }}
+          {{ translations?.table?.change_24h || '24h Change' }}
           <SortIndicator :active="sortField === 'price_change_percentage_24h'" :direction="sortDirection" />
         </div>
       </th>
       <th scope="col" @click="toggleSort('market_cap')" class="table-header">
         <div class="table-header-content">
-          {{ translations.table.market_cap }}
+          {{ translations?.table?.market_cap || 'Market Cap' }}
           <SortIndicator :active="sortField === 'market_cap'" :direction="sortDirection" />
         </div>
       </th>

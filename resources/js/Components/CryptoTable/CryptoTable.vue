@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="!cryptos || cryptos.length === 0" class="flex justify-center items-center h-40">
-      <div class="text-gray-500">{{ translations.loading }}</div>
+      <div class="text-gray-500">{{ translations?.loading || 'Loading cryptocurrency data...' }}</div>
     </div>
     <div v-else>
       <div class="overflow-x-auto">
