@@ -4,7 +4,6 @@ return [
     'api' => [
         'base_url' => env('CRYPTO_API_URL', 'https://api.coingecko.com/api/v3'),
         'currency' => env('CRYPTO_CURRENCY', 'usd'),
-        'per_page' => env('CRYPTO_PER_PAGE', 250),
     ],
 
     'cache' => [

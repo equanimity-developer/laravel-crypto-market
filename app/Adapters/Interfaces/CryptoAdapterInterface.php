@@ -9,5 +9,5 @@ use App\DTOs\CryptoMarketDTO;
 interface CryptoAdapterInterface
 {
     /** @return array<CryptoMarketDTO> */
-    public function getMarketData(array $params = []): array;
+    public function getMarketData(): array;
 }
