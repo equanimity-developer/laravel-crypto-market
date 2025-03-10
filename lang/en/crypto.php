@@ -35,9 +35,17 @@ return [
     'logs' => [
         'fetching_data' => 'Fetching fresh market data from CoinGecko API',
         'api_error' => 'CoinGecko API error',
-        'fetch_error' => 'Failed to fetch market data:',
+        'fetch_error' => 'Failed to fetch market data: :error',
         'error_overview' => 'Error fetching market overview',
         'connection_error' => 'CoinGecko API connection error: :message',
+        'unexpected_error' => 'CoinGecko API unexpected error: :message',
+        'rate_limit_reached' => 'CoinGecko API rate limit reached. Retry after: :seconds seconds',
+        'parse_error' => 'Failed to parse response from CoinGecko API',
+        'invalid_response' => 'Invalid response format from CoinGecko API',
+        'http_error' => 'CoinGecko API HTTP error (:status): :message',
+        'timeout_error' => 'Connection timed out while connecting to CoinGecko API',
+        'refreshing_data' => 'Refreshing market data from CoinGecko API',
+        'empty_response' => 'Received empty response from CoinGecko API',
     ],
 
     'languages' => [

@@ -157,6 +157,11 @@ class CoinGeckoClientTest extends TestCase
             $this->client->getMarkets($this->perPage, $this->page);
         } catch (CloudflareException $e) {
             $this->assertEquals(1020, $e->getCloudflareCode());
+            $this->assertEquals([
+                'error' => 'Access denied by CDN',
+                'cloudflare_status' => 1020
+            ], $e->getResponseData());
+            $this->assertEquals(403, $e->getStatusCode());
             throw $e;
         }
     }

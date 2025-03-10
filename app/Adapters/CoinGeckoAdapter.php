@@ -45,7 +45,7 @@ class CoinGeckoAdapter implements CryptoAdapterInterface
 
             } catch (\Exception $e) {
                 Log::error(__('crypto.logs.fetch_error'), ['error' => $e->getMessage()]);
-                break;
+                throw $e;
             }
         }
 

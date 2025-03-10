@@ -31,4 +31,4 @@ class CoinGeckoApiException extends \Exception
     {
         return $this->statusCode;
     }
-} 
+}

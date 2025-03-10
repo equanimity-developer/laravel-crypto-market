@@ -6,7 +6,6 @@ namespace App\Exceptions\CoinGecko;
 
 use App\Exceptions\CoinGecko\Http\BadRequestException;
 use App\Exceptions\CoinGecko\Http\ForbiddenException;
-use App\Exceptions\CoinGecko\Http\NotFoundException;
 use App\Exceptions\CoinGecko\Http\RateLimitException;
 use App\Exceptions\CoinGecko\Http\ServerErrorException;
 use App\Exceptions\CoinGecko\Http\UnauthorizedException;
@@ -63,11 +62,6 @@ class CoinGeckoExceptionFactory
             ),
             403 => new ForbiddenException(
                 code: 403,
-                responseData: $data,
-                statusCode: $status
-            ),
-            404 => new NotFoundException(
-                code: 404,
                 responseData: $data,
                 statusCode: $status
             ),
