@@ -5,6 +5,7 @@ return [
     'title' => 'Rynek Kryptowalut',
     'loading' => 'Ładowanie danych kryptowalut...',
     'error' => 'Nie można pobrać danych kryptowalut. Spróbuj ponownie później.',
+    'external_service_error' => 'Błąd usługi zewnętrznej. Proszę spróbować ponownie później.',
 
     'refresh' => [
         'button' => 'Odśwież Dane',
@@ -46,6 +47,7 @@ return [
         'timeout_error' => 'Przekroczono limit czasu połączenia z API CoinGecko',
         'refreshing_data' => 'Odświeżanie danych rynkowych z API CoinGecko',
         'empty_response' => 'Otrzymano pustą odpowiedź z API CoinGecko',
+        'request_error' => 'Błąd podczas wykonywania zapytania do API CoinGecko: :message',
     ],
 
     'languages' => [

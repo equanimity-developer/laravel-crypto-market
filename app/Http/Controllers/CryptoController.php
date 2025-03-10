@@ -24,7 +24,7 @@ class CryptoController extends Controller
     {
         try {
             $cryptos = $this->cryptoService->getMarketOverview();
-            
+
             return Inertia::render('Dashboard', [
                 'cryptos' => $cryptos,
                 'filters' => [],
@@ -33,16 +33,16 @@ class CryptoController extends Controller
             return Inertia::render('Dashboard', [
                 'cryptos' => [],
                 'filters' => [],
-                'error' => $e->getMessage(),
+                'error' => __('crypto.external_service_error'),
             ]);
         }
     }
-    
+
     public function refreshData(): JsonResponse
     {
         $cacheKey = Config::get('crypto.cache.key', 'crypto_market_full_dataset');
         Cache::forget($cacheKey);
-        
+
         return response()->json([
             'success' => true,
             'message' => __('crypto.refresh.success')

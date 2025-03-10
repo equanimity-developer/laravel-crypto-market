@@ -5,6 +5,7 @@ return [
     'title' => 'Cryptocurrency Market',
     'loading' => 'Loading cryptocurrency data...',
     'error' => 'Unable to fetch cryptocurrency data. Please try again later.',
+    'external_service_error' => 'External service error. Please try again later.',
 
     'refresh' => [
         'button' => 'Refresh Data',
@@ -46,6 +47,7 @@ return [
         'timeout_error' => 'Connection timed out while connecting to CoinGecko API',
         'refreshing_data' => 'Refreshing market data from CoinGecko API',
         'empty_response' => 'Received empty response from CoinGecko API',
+        'request_error' => 'Error making request to CoinGecko API: :message',
     ],
 
     'languages' => [

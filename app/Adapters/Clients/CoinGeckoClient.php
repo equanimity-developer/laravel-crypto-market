@@ -8,7 +8,6 @@ use App\Exceptions\CoinGecko\CoinGeckoExceptionFactory;
 use App\Exceptions\CoinGecko\MalformedResponseException;
 use App\Exceptions\CoinGecko\ConnectionFailedException;
 use Illuminate\Http\Client\ConnectionException;
-use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
@@ -57,10 +56,6 @@ class CoinGeckoClient
         } catch (ConnectionException $e) {
             Log::error(__('crypto.logs.connection_error', ['message' => $e->getMessage()]));
             throw CoinGeckoExceptionFactory::createFromConnectionException($e);
-        } catch (RequestException $e) {
-            $response = $e->response;
-            Log::error(__('crypto.logs.request_error', ['message' => $e->getMessage()]));
-            throw CoinGeckoExceptionFactory::createFromResponse($response);
         } catch (MalformedResponseException | ConnectionFailedException $e) {
             throw $e;
         } catch (\Exception $e) {
