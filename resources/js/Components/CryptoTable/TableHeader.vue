@@ -42,8 +42,8 @@ defineProps({
   translations: Object,
 });
 
-const sortField = defineModel('sort.field');
-const sortDirection = defineModel('sort.direction');
+const sortField = defineModel('sortField');
+const sortDirection = defineModel('sortDirection');
 
 function toggleSort(field) {
   if (sortField.value === field) {

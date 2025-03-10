@@ -8,8 +8,8 @@
         <table class="crypto-table">
           <TableHeader
             :translations="translations"
-            v-model:sort.field="sortField"
-            v-model:sort.direction="sortDirection"
+            v-model:sortField="sortField"
+            v-model:sortDirection="sortDirection"
           />
           <tbody class="bg-white divide-y divide-gray-200">
             <TableRow
