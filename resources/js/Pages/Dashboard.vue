@@ -21,6 +21,7 @@
         </div>
 
         <CryptoTable
+          ref="cryptoTableRef"
           :cryptos="paginatedCryptos"
           :translations="translations"
           :sort-field="sortField"
@@ -58,6 +59,7 @@ const error = page.props.error;
 const filters = page.props.filters || {};
 const { translations } = useTranslations();
 
+const cryptoTableRef = ref(null);
 const currentPage = ref(1);
 const itemsPerPage = ref(25);
 const sortField = ref('market_cap_rank');
@@ -74,7 +76,7 @@ const paginatedCryptos = computed(() => {
 
 function handlePageChange(newPage) {
   currentPage.value = newPage;
-  document.querySelector('.overflow-x-auto')?.scrollIntoView({ behavior: 'smooth' });
+  scrollToTable();
 }
 
 function handleFilter(filters) {
@@ -91,6 +93,12 @@ function handleSortUpdate({ field, direction }) {
 function handlePerPageChange(newPerPage) {
   itemsPerPage.value = newPerPage;
   currentPage.value = 1;
-  document.querySelector('.overflow-x-auto')?.scrollIntoView({ behavior: 'smooth' });
+  scrollToTable();
+}
+
+function scrollToTable() {
+  if (cryptoTableRef.value) {
+    cryptoTableRef.value.$el.scrollIntoView({ behavior: 'smooth' });
+  }
 }
 </script>

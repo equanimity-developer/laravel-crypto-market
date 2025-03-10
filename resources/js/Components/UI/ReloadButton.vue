@@ -41,16 +41,15 @@ const page = usePage();
 const { translations } = useTranslations();
 const isLoading = ref(false);
 
-function refreshMarketData() {
+async function refreshMarketData() {
   isLoading.value = true;
   
-  axios.post('/refresh-market-data')
-    .then(() => {
-      window.location.reload();
-    })
-    .catch(error => {
-      console.error('Error refreshing data:', error);
-      isLoading.value = false;
-    });
+  try {
+    await axios.post('/refresh-market-data');
+    window.location.reload();
+  } catch (error) {
+    console.error('Error refreshing data:', error);
+    isLoading.value = false;
+  }
 }
 </script> 
