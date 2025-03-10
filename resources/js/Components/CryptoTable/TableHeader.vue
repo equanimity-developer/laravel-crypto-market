@@ -38,25 +38,19 @@
 <script setup>
 import SortIndicator from '@/Components/SortIndicator.vue';
 
-const props = defineProps({
+defineProps({
   translations: Object,
-  sortField: String,
-  sortDirection: String
 });
 
-const emit = defineEmits(['update:sort']);
+const sortField = defineModel('sort.field');
+const sortDirection = defineModel('sort.direction');
 
 function toggleSort(field) {
-  if (props.sortField === field) {
-    emit('update:sort', {
-      field,
-      direction: props.sortDirection === 'asc' ? 'desc' : 'asc'
-    });
+  if (sortField.value === field) {
+    sortDirection.value = sortDirection.value === 'asc' ? 'desc' : 'asc';
   } else {
-    emit('update:sort', {
-      field,
-      direction: 'asc'
-    });
+    sortField.value = field;
+    sortDirection.value = 'asc';
   }
 }
 </script> 

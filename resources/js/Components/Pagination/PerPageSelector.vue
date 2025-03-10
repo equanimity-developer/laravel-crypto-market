@@ -5,8 +5,7 @@
     </label>
     <select
       id="per-page-select"
-      v-model="localValue"
-      @change="onChange"
+      v-model="model"
       class="per-page-select"
     >
       <option v-for="option in options" :key="option" :value="option">
@@ -17,13 +16,7 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue';
-
-const props = defineProps({
-  value: {
-    type: Number,
-    required: true
-  },
+defineProps({
   options: {
     type: Array,
     default: () => [10, 25, 50, 100]
@@ -34,15 +27,5 @@ const props = defineProps({
   }
 });
 
-const emit = defineEmits(['update']);
-
-const localValue = ref(props.value);
-
-watch(() => props.value, (newValue) => {
-  localValue.value = newValue;
-});
-
-function onChange() {
-  emit('update', localValue.value);
-}
+const model = defineModel();
 </script> 

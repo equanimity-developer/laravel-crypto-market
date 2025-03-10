@@ -6,7 +6,7 @@
     <input
       :id="id"
       :type="type"
-      v-model="inputValue"
+      v-model="model"
       :placeholder="placeholder"
       class="filter-input"
     />
@@ -14,9 +14,7 @@
 </template>
 
 <script setup>
-import { ref, watch, onMounted } from 'vue';
-
-const props = defineProps({
+defineProps({
   id: {
     type: String,
     required: true
@@ -32,26 +30,8 @@ const props = defineProps({
   placeholder: {
     type: String,
     default: ''
-  },
-  modelValue: {
-    type: [String, Number],
-    default: ''
   }
 });
 
-const emit = defineEmits(['update:modelValue']);
-
-const inputValue = ref(props.modelValue);
-
-watch(() => props.modelValue, (newValue) => {
-  inputValue.value = newValue;
-});
-
-watch(inputValue, (newValue) => {
-  emit('update:modelValue', newValue);
-});
-
-onMounted(() => {
-  inputValue.value = props.modelValue;
-});
-</script> 
+const model = defineModel();
+</script>

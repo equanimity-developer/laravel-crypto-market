@@ -11,9 +11,8 @@
         </div>
 
         <CryptoFilter
-          :applied-filters="filters"
+          v-model="localFilters"
           :translations="translations"
-          @filter="handleFilter"
         />
 
         <div v-if="error" class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded relative mb-4">
@@ -24,18 +23,15 @@
           ref="cryptoTableRef"
           :cryptos="paginatedCryptos"
           :translations="translations"
-          :sort-field="sortField"
-          :sort-direction="sortDirection"
-          @update:sort="handleSortUpdate"
+          v-model:sortField="sortField"
+          v-model:sortDirection="sortDirection"
         />
 
         <Pagination
-          :current-page="currentPage"
-          :items-per-page="itemsPerPage"
+          v-model:currentPage="currentPage"
+          v-model:itemsPerPage="itemsPerPage"
           :total-items="filteredCryptos.length"
           :translations="translations"
-          @page-change="handlePageChange"
-          @per-page-change="handlePerPageChange"
         />
       </div>
     </div>
@@ -43,7 +39,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, watch } from 'vue';
 import { usePage } from '@inertiajs/vue3';
 import { useTranslations } from '@/Composables/useTranslations';
 import LanguageSwitcher from '@/Components/LanguageSwitcher.vue';
@@ -64,7 +60,7 @@ const currentPage = ref(1);
 const itemsPerPage = ref(25);
 const sortField = ref('market_cap_rank');
 const sortDirection = ref('asc');
-const localFilters = ref({});
+const localFilters = ref(filters);
 
 const filteredCryptos = computed(() => {
   return filterAndSortCryptos(cryptos, localFilters.value, sortField.value, sortDirection.value);
@@ -74,27 +70,13 @@ const paginatedCryptos = computed(() => {
   return getPaginatedData(filteredCryptos.value, currentPage.value, itemsPerPage.value);
 });
 
-function handlePageChange(newPage) {
-  currentPage.value = newPage;
+watch([sortField, sortDirection, localFilters, itemsPerPage], () => {
+  currentPage.value = 1;
+});
+
+watch([currentPage, itemsPerPage], () => {
   scrollToTable();
-}
-
-function handleFilter(filters) {
-  localFilters.value = filters;
-  currentPage.value = 1;
-}
-
-function handleSortUpdate({ field, direction }) {
-  sortField.value = field;
-  sortDirection.value = direction;
-  currentPage.value = 1;
-}
-
-function handlePerPageChange(newPerPage) {
-  itemsPerPage.value = newPerPage;
-  currentPage.value = 1;
-  scrollToTable();
-}
+});
 
 function scrollToTable() {
   if (cryptoTableRef.value) {

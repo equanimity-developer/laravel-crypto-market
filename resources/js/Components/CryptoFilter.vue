@@ -48,7 +48,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue';
+import { ref, onMounted } from 'vue';
 import { usePage } from '@inertiajs/vue3';
 import { useTranslations } from '@/Composables/useTranslations';
 import FilterInput from '@/Components/CryptoFilter/FilterInput.vue';
@@ -56,11 +56,7 @@ import FilterInput from '@/Components/CryptoFilter/FilterInput.vue';
 const page = usePage();
 const { translations } = useTranslations();
 
-const props = defineProps({
-  appliedFilters: Object,
-});
-
-const emit = defineEmits(['filter']);
+const filters = defineModel();
 
 const filterForm = ref({
   search: '',
@@ -69,17 +65,17 @@ const filterForm = ref({
 });
 
 onMounted(() => {
-  if (props.appliedFilters) {
+  if (filters.value) {
     filterForm.value = {
-      search: props.appliedFilters.search || '',
-      min_price: props.appliedFilters.min_price || '',
-      max_price: props.appliedFilters.max_price || ''
+      search: filters.value.search || '',
+      min_price: filters.value.min_price || '',
+      max_price: filters.value.max_price || ''
     };
   }
 });
 
 function applyFilters() {
-  emit('filter', filterForm.value);
+  filters.value = { ...filterForm.value };
 }
 
 function resetFilters() {
@@ -88,6 +84,6 @@ function resetFilters() {
     min_price: '',
     max_price: ''
   };
-  emit('filter', {});
+  filters.value = {};
 }
 </script>

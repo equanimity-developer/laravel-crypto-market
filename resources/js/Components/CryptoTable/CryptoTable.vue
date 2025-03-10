@@ -8,9 +8,8 @@
         <table class="crypto-table">
           <TableHeader
             :translations="translations"
-            :sort-field="sortField"
-            :sort-direction="sortDirection"
-            @update:sort="$emit('update:sort', $event)"
+            v-model:sort.field="sortField"
+            v-model:sort.direction="sortDirection"
           />
           <tbody class="bg-white divide-y divide-gray-200">
             <TableRow
@@ -32,9 +31,8 @@ import TableRow from './TableRow.vue';
 defineProps({
   cryptos: Array,
   translations: Object,
-  sortField: String,
-  sortDirection: String
 });
 
-defineEmits(['update:sort']);
+const sortField = defineModel('sortField');
+const sortDirection = defineModel('sortDirection');
 </script> 

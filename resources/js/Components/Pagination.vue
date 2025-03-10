@@ -2,7 +2,7 @@
   <div class="pagination-container">
     <div class="pagination-mobile">
       <PaginationButton
-        @click="emit('page-change', currentPage - 1)"
+        @click="currentPage = Math.max(1, currentPage - 1)"
         :disabled="currentPage <= 1"
         :base-class="'btn-secondary'"
         :inactive-class="''"
@@ -11,7 +11,7 @@
         {{ translations.pagination.previous }}
       </PaginationButton>
       <PaginationButton
-        @click="emit('page-change', currentPage + 1)"
+        @click="currentPage = Math.min(totalPages, currentPage + 1)"
         :disabled="currentPage >= totalPages"
         :base-class="'btn-secondary'"
         :inactive-class="''"
@@ -28,15 +28,14 @@
           :translations="translations"
         />
         <PerPageSelector
-          :value="itemsPerPage"
-          @update="handlePerPageChange"
+          v-model="itemsPerPage"
           :translations="translations"
         />
       </div>
       <div>
         <nav class="pagination-nav" aria-label="Pagination">
           <PaginationButton
-            @click="emit('page-change', currentPage - 1)"
+            @click="currentPage = Math.max(1, currentPage - 1)"
             :disabled="currentPage <= 1"
             :base-class="'pagination-arrow'"
             :inactive-class="''"
@@ -49,7 +48,7 @@
           <template v-for="(page, index) in paginationRange" :key="index">
             <PaginationButton
               v-if="page !== '...'"
-              @click="emit('page-change', page)"
+              @click="currentPage = page"
               :active="page === currentPage"
             >
               {{ page }}
@@ -63,7 +62,7 @@
           </template>
 
           <PaginationButton
-            @click="emit('page-change', currentPage + 1)"
+            @click="currentPage = Math.min(totalPages, currentPage + 1)"
             :disabled="currentPage >= totalPages"
             :base-class="'pagination-arrow'"
             :inactive-class="''"
@@ -80,40 +79,27 @@
 
 <script setup>
 import { computed } from 'vue';
-import { usePage } from '@inertiajs/vue3';
 import { useTranslations } from '@/Composables/useTranslations';
 import PaginationButton from '@/Components/Pagination/PaginationButton.vue';
 import PaginationInfo from '@/Components/Pagination/PaginationInfo.vue';
 import PerPageSelector from '@/Components/Pagination/PerPageSelector.vue';
 import Icon from '@/Components/UI/Icon.vue';
 
-const page = usePage();
 const { translations } = useTranslations();
 
 const props = defineProps({
-  currentPage: {
-    type: Number,
-    required: true
-  },
-  itemsPerPage: {
-    type: Number,
-    required: true
-  },
   totalItems: {
     type: Number,
     required: true
   }
 });
 
-const emit = defineEmits(['page-change', 'per-page-change']);
+const currentPage = defineModel('currentPage');
+const itemsPerPage = defineModel('itemsPerPage');
 
-const totalPages = computed(() => Math.max(1, Math.ceil(props.totalItems / props.itemsPerPage)));
-const startItem = computed(() => props.totalItems === 0 ? 0 : ((props.currentPage - 1) * props.itemsPerPage) + 1);
-const endItem = computed(() => Math.min(startItem.value + props.itemsPerPage - 1, props.totalItems));
-
-function handlePerPageChange(newPerPage) {
-  emit('per-page-change', newPerPage);
-}
+const totalPages = computed(() => Math.max(1, Math.ceil(props.totalItems / itemsPerPage.value)));
+const startItem = computed(() => props.totalItems === 0 ? 0 : ((currentPage.value - 1) * itemsPerPage.value) + 1);
+const endItem = computed(() => Math.min(startItem.value + itemsPerPage.value - 1, props.totalItems));
 
 const paginationRange = computed(() => {
   const delta = 1;
@@ -129,9 +115,9 @@ const paginationRange = computed(() => {
   for (let i = 2; i < totalPages.value; i++) {
     if (i <= 1 + delta ||
         i >= totalPages.value - delta ||
-        (i >= props.currentPage - delta && i <= props.currentPage + delta)) {
+        (i >= currentPage.value - delta && i <= currentPage.value + delta)) {
       range.push(i);
-    } else if (i === props.currentPage - delta - 1 || i === props.currentPage + delta + 1) {
+    } else if (i === currentPage.value - delta - 1 || i === currentPage.value + delta + 1) {
       range.push('...');
     }
   }
