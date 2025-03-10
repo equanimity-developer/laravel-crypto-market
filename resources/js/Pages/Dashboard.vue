@@ -3,7 +3,7 @@
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
       <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
         <div class="flex justify-between items-center mb-6">
-          <h1 class="text-2xl font-bold text-gray-800">{{ translations?.title || 'Cryptocurrency Market' }}</h1>
+          <h1 class="text-2xl font-bold text-gray-800">{{ translations.title }}</h1>
           <div class="flex items-center space-x-2">
             <ReloadButton />
             <LanguageSwitcher />
@@ -42,8 +42,9 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed } from 'vue';
 import { usePage } from '@inertiajs/vue3';
+import { useTranslations } from '@/Composables/useTranslations';
 import LanguageSwitcher from '@/Components/LanguageSwitcher.vue';
 import ReloadButton from '@/Components/UI/ReloadButton.vue';
 import CryptoFilter from '@/Components/CryptoFilter.vue';
@@ -55,7 +56,7 @@ const page = usePage();
 const cryptos = page.props.cryptos || [];
 const error = page.props.error;
 const filters = page.props.filters || {};
-const translations = computed(() => page.props.translations);
+const { translations } = useTranslations();
 
 const currentPage = ref(1);
 const itemsPerPage = ref(25);

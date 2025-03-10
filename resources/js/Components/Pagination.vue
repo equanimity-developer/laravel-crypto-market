@@ -8,7 +8,7 @@
         :inactive-class="''"
         :extra-classes="['mr-3']"
       >
-        {{ translations?.pagination?.previous || 'Previous' }}
+        {{ translations.pagination.previous }}
       </PaginationButton>
       <PaginationButton
         @click="emit('page-change', currentPage + 1)"
@@ -16,7 +16,7 @@
         :base-class="'btn-secondary'"
         :inactive-class="''"
       >
-        {{ translations?.pagination?.next || 'Next' }}
+        {{ translations.pagination.next }}
       </PaginationButton>
     </div>
     <div class="pagination-desktop">
@@ -81,13 +81,14 @@
 <script setup>
 import { computed } from 'vue';
 import { usePage } from '@inertiajs/vue3';
+import { useTranslations } from '@/Composables/useTranslations';
 import PaginationButton from '@/Components/Pagination/PaginationButton.vue';
 import PaginationInfo from '@/Components/Pagination/PaginationInfo.vue';
 import PerPageSelector from '@/Components/Pagination/PerPageSelector.vue';
 import Icon from '@/Components/UI/Icon.vue';
 
 const page = usePage();
-const translations = computed(() => page.props.translations);
+const { translations } = useTranslations();
 
 const props = defineProps({
   currentPage: {

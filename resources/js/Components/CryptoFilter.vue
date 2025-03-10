@@ -1,29 +1,29 @@
 <template>
   <div class="filter-container">
-    <h3 class="filter-title">{{ translations?.filters?.title || 'Filters' }}</h3>
+    <h3 class="filter-title">{{ translations.filters.title }}</h3>
 
     <div class="filter-grid">
       <FilterInput
         id="search"
-        :label="translations?.filters?.search || 'Search'"
+        :label="translations.filters.search"
         type="text"
-        :placeholder="translations?.filters?.search_placeholder || 'Bitcoin, ETH...'"
+        :placeholder="translations.filters.search_placeholder"
         v-model="filterForm.search"
       />
 
       <FilterInput
         id="min_price"
-        :label="translations?.filters?.min_price || 'Min Price ($)'"
+        :label="translations.filters.min_price"
         type="number"
-        :placeholder="translations?.filters?.min_placeholder || '0'"
+        :placeholder="translations.filters.min_placeholder"
         v-model="filterForm.min_price"
       />
 
       <FilterInput
         id="max_price"
-        :label="translations?.filters?.max_price || 'Max Price ($)'"
+        :label="translations.filters.max_price"
         type="number"
-        :placeholder="translations?.filters?.max_placeholder || '1000'"
+        :placeholder="translations.filters.max_placeholder"
         v-model="filterForm.max_price"
       />
     </div>
@@ -34,14 +34,14 @@
         class="btn-secondary"
         @click="resetFilters"
       >
-        {{ translations?.filters?.reset || 'Reset' }}
+        {{ translations.filters.reset }}
       </button>
       <button
         type="button"
         class="btn-primary"
         @click="applyFilters"
       >
-        {{ translations?.filters?.apply || 'Apply' }}
+        {{ translations.filters.apply }}
       </button>
     </div>
   </div>
@@ -50,10 +50,11 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue';
 import { usePage } from '@inertiajs/vue3';
+import { useTranslations } from '@/Composables/useTranslations';
 import FilterInput from '@/Components/CryptoFilter/FilterInput.vue';
 
 const page = usePage();
-const translations = computed(() => page.props.translations);
+const { translations } = useTranslations();
 
 const props = defineProps({
   appliedFilters: Object,

@@ -22,8 +22,10 @@
 <script setup>
 import { computed } from 'vue';
 import { usePage } from '@inertiajs/vue3';
+import { useTranslations } from '@/Composables/useTranslations';
 
 const page = usePage();
+const { translations } = useTranslations();
 const currentLocale = computed(() => {
   return page.props.app?.locale || 'en';
 });

@@ -27,17 +27,18 @@
     >
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
     </svg>
-    <span>{{ isLoading ? translations.refresh?.loading || 'Refreshing...' : translations.refresh?.button || 'Refresh Data' }}</span>
+    <span>{{ isLoading ? translations.refresh.loading : translations.refresh.button }}</span>
   </button>
 </template>
 
 <script setup>
 import { ref, computed } from 'vue';
 import { usePage } from '@inertiajs/vue3';
+import { useTranslations } from '@/Composables/useTranslations';
 import axios from 'axios';
 
 const page = usePage();
-const translations = computed(() => page.props.translations);
+const { translations } = useTranslations();
 const isLoading = ref(false);
 
 function refreshMarketData() {

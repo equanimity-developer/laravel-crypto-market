@@ -1,7 +1,7 @@
 <template>
   <div class="per-page-selector">
     <label for="per-page-select" class="mr-2">
-      {{ translations?.pagination?.per_page || 'Items per page:' }}
+      {{ translations.pagination.per_page }}
     </label>
     <select
       id="per-page-select"
@@ -30,7 +30,7 @@ const props = defineProps({
   },
   translations: {
     type: Object,
-    default: () => ({})
+    required: true
   }
 });
 
