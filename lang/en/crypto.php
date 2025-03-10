@@ -37,6 +37,7 @@ return [
         'api_error' => 'CoinGecko API error',
         'fetch_error' => 'Failed to fetch market data:',
         'error_overview' => 'Error fetching market overview',
+        'connection_error' => 'CoinGecko API connection error: :message',
     ],
 
     'languages' => [

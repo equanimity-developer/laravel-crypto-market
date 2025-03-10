@@ -37,6 +37,7 @@ return [
         'api_error' => 'Błąd API CoinGecko',
         'fetch_error' => 'Nie udało się pobrać danych rynkowych:',
         'error_overview' => 'Błąd podczas pobierania przeglądu rynku',
+        'connection_error' => 'Błąd połączenia z API CoinGecko: :message',
     ],
 
     'languages' => [
