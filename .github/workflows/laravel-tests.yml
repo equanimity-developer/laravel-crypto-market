@@ -30,5 +30,17 @@ jobs:
       - name: Generate application key
         run: php artisan key:generate
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install NPM dependencies
+        run: npm ci
+
+      - name: Build frontend
+        run: npm run build
+
       - name: Run tests with coverage
         run: vendor/bin/phpunit --coverage-clover=coverage.xml
